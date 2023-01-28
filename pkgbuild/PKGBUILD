@@ -9,7 +9,7 @@ license=('custom')
 
 _name=${pkgname/bbv-/}
 
-depends=("python-cheroot")
+depends=("python-cheroot" "python-setuptools")
 source=("$pkgname-$pkgver.tar.gz::https://github.com/webpy/webpy/archive/$pkgver.tar.gz")
 sha256sums=("c1d330fca423aaef2949a53d7cddaa23de2275ec7b034a886582cdcce7e09d3c")
 
