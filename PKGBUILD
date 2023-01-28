@@ -1,0 +1,29 @@
+# Maintainer: eltonff <eltonfabricio10@gmail.com>
+pkgname=bbv-webpy
+pkgver=0.62
+pkgrel=1
+pkgdesc="A web framework for Python"
+arch=("any")
+url="https://webpy.org/"
+license=('custom')
+
+_name=${pkgname/bbv-/}
+
+depends=("python-cheroot")
+source=("$pkgname-$pkgver.tar.gz::https://github.com/webpy/webpy/archive/$pkgver.tar.gz")
+sha256sums=("c1d330fca423aaef2949a53d7cddaa23de2275ec7b034a886582cdcce7e09d3c")
+
+build() {
+    cd "$_name-$pkgver"
+    /usr/bin/python3 setup.py build
+}
+
+package() {
+    cd "$_name-$pkgver"
+    /usr/bin/python3 setup.py install --root="$pkgdir" --optimize=1 --skip-build
+
+    # Add license file to the package
+    mkdir -p ${pkgdir}/usr/share/licences/${pkgname}/
+    install ./LICENSE.txt ${pkgdir}/usr/share/licences/${pkgname}/license
+}
+
