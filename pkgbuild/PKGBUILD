@@ -22,6 +22,11 @@ package() {
     cd "$_name-$pkgver"
     /usr/bin/python3 setup.py install --root="$pkgdir" --optimize=1 --skip-build
 
+    # python 3.11
+    if [ ! -e "/usr/lib/python3.11/site-packages/web" ]; then
+        ln -s /usr/lib/python3.10/site-packages/web /usr/lib/python3.11/site-packages/web
+    fi
+
     # Add license file to the package
     mkdir -p ${pkgdir}/usr/share/licences/${pkgname}/
     install ./LICENSE.txt ${pkgdir}/usr/share/licences/${pkgname}/license
