@@ -24,7 +24,7 @@ package() {
 
     # python 3.11
     if [ ! -e "/usr/lib/python3.11/site-packages/web" ]; then
-        ln -s /usr/lib/python3.10/site-packages/web /usr/lib/python3.11/site-packages/web
+        ln -s ${pkgdir}/usr/lib/python3.10/site-packages/web ${pkgdir}/usr/lib/python3.11/site-packages/web
     fi
 
     # Add license file to the package
