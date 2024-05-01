@@ -2,8 +2,7 @@
 # Maintainer: eltonff <eltonfabricio10@gmail.com>
 
 # After 0.70 change to fork of https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=python-webpy by Contributor: Brenden Davidson <davidson.brenden15@gmail.com>
-# Now modified by Bruno Goncalves <www.biglinux.com.br>
-# I don't know why name changed to bbv-web, anyway to not broken depends maintain package name
+# And modified by Bruno Goncalves <www.biglinux.com.br> to turn compatible with python 3.11 and 3.12 in one package
 
 _module="webpy"
 _pkgname="python-$_module"
@@ -49,6 +48,18 @@ build() {
 package() {
   cd "$_pkgsrc"
   python -m installer --destdir="${pkgdir:?}" dist/*.whl
-
   install -Dm644 "LICENSE.txt" "${pkgdir:?}/usr/share/licenses/${_pkgname:?}/LICENSE"
+
+  # turn compatible with python 3.11 and 3.12
+  cd ${pkgdir:?}
+  if [[ -e usr/lib/python3.12 ]]; then
+    mkdir -p usr/lib/python3.11/site-packages
+    cd usr/lib/python3.11/site-packages
+    ln -s ../../python3.12/site-packages/web web
+  elif  [[ -e usr/lib/python3.11 ]]; then
+    mkdir -p usr/lib/python3.12/site-packages
+    cd usr/lib/python3.12/site-packages
+    ln -s ../../python3.11/site-packages/web web
+  fi
+
 }
