@@ -57,10 +57,16 @@ package() {
     mkdir -p usr/lib/python3.11/site-packages
     cd usr/lib/python3.11/site-packages
     ln -s ../../python3.12/site-packages/web web
-  elif  [[ -e usr/lib/python3.11 ]]; then
-    rm -R usr/lib/python3.11/site-packages/web/__pycache__
+    mkdir -p usr/lib/python3.13/site-packages
+    cd usr/lib/python3.13/site-packages
+    ln -s ../../python3.12/site-packages/web web
+  elif  [[ -e usr/lib/python3.13 ]]; then
+    rm -R usr/lib/python3.13/site-packages/web/__pycache__
     mkdir -p usr/lib/python3.12/site-packages
     cd usr/lib/python3.12/site-packages
+    ln -s ../../python3.13/site-packages/web web
+    mkdir -p usr/lib/python3.11/site-packages
+    cd usr/lib/python3.11/site-packages
     ln -s ../../python3.11/site-packages/web web
   fi
 }
