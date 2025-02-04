@@ -8,7 +8,7 @@ _module="webpy"
 _pkgname="python-$_module"
 pkgname="bbv-$_module"
 pkgver=0.70
-pkgrel=5
+pkgrel=6
 replaces=('python-webpy')
 provides=('python-webpy')
 pkgdesc="A web framework for Python"
@@ -57,10 +57,10 @@ package() {
     mkdir -p usr/lib/python3.13/site-packages
     cd usr/lib/python3.13/site-packages
     ln -s ../../python3.12/site-packages/web web
-  elif  [[ -e usr/lib/python3.13 ]]; then
-    rm -R usr/lib/python3.13/site-packages/web/__pycache__
-    mkdir -p usr/lib/python3.12/site-packages
-    cd usr/lib/python3.12/site-packages
-    ln -s ../../python3.13/site-packages/web web
+#   elif  [[ -e usr/lib/python3.13 ]]; then
+#     rm -R usr/lib/python3.13/site-packages/web/__pycache__
+#     mkdir -p usr/lib/python3.12/site-packages
+#     cd usr/lib/python3.12/site-packages
+#     ln -s ../../python3.13/site-packages/web web
   fi
 }
